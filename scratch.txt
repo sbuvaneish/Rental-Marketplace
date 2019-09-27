@@ -1,0 +1,9 @@
+create table products (product_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, name VARCHAR(50), brand VARCHAR(50)
+, color VARCHAR(50), price REAL, category VARCHAR(50), description VARCHAR(500), is_available BOOLEAN);  
+
+CREATE TABLE users (     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,     username VARCHAR(50) NOT NULL UNIQUE,
+     password VARCHAR(255) NOT NULL, rating DOUBLE,  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT
+_TIMESTAMP);      
+
+DB name : heroku_2f6114e386eb6eb
+
