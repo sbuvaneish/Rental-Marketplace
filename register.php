@@ -13,7 +13,7 @@ $message = '';
 if(!empty($_POST['email']) && !empty($_POST['password'])):
 	
 	// Enter the new user in the database
-	$sql = "INSERT INTO users (email, password) VALUES (:email, :password)";
+	$sql = "INSERT INTO users (username, password) VALUES (:email, :password)";
 	$stmt = $conn->prepare($sql);
 
 	$stmt->bindParam(':email', $_POST['email']);
