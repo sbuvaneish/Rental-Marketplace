@@ -12,18 +12,28 @@ $message = '';
 
 if(!empty($_POST['email']) && !empty($_POST['password'])):
 	
-	// Enter the new user in the database
-	$sql = "INSERT INTO users (username, password) VALUES (:email, :password)";
-	$stmt = $conn->prepare($sql);
-
-	$stmt->bindParam(':email', $_POST['email']);
-	$stmt->bindParam(':password', password_hash($_POST['password'], PASSWORD_BCRYPT));
-
-	if( $stmt->execute() ):
-		$message = 'Successfully created new user';
-	else:
-		$message = 'Sorry there must have been an issue creating your account';
-	endif;
+	if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+		$message = "Invalid email format";
+	}
+	else if(strcmp($_POST['password'], $_POST['confirm_password'])) {
+		$message = "Passwords do not match";
+	}
+	else {
+	
+		// Enter the new user in the database
+		$sql = "INSERT INTO users (username, password) VALUES (:email, :password)";
+		$stmt = $conn->prepare($sql);
+	
+		$stmt->bindParam(':email', $_POST['email']);
+		$stmt->bindParam(':password', password_hash($_POST['password'], PASSWORD_BCRYPT));
+	
+		if( $stmt->execute() ):
+			$message = 'Successfully created new user';
+		else:
+			$message = 'Sorry there must have been an issue creating your account';
+		endif;
+		
+	}
 
 endif;
 
