@@ -7,3 +7,9 @@ _TIMESTAMP);
 
 DB name : heroku_2f6114e386eb6eb
 
+mysql://b7e32c44881d1e:5550f55b@us-cdbr-iron-east-02.cleardb.net/heroku_2f6114e386eb6eb?reconnect=true
+
+mysql -u b7e32c44881d1e  -h us-cdbr-iron-east-02.cleardb.net -p
+
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password
+    -> BY 'password'; 
