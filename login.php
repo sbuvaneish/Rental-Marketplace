@@ -25,6 +25,10 @@ if(!empty($_POST['email']) && !empty($_POST['password'])):
 	} else {
 		$message = 'Sorry, those credentials do not match';
 	}
+	$records = $conn->prepare('SELECT image from images');
+	$records->execute();
+        $results = $records->fetch(PDO::FETCH_ASSOC);
+	echo $results['image'];
 
 endif;
 

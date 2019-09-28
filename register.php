@@ -15,7 +15,7 @@ if(!empty($_POST['email']) && !empty($_POST['password'])):
 	if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
 		$message = "Invalid email format";
 	}
-	else if(strcmp($_POST['password'], $_POST['confirm_password'])) {
+	else if(strcmp($_POST['password'], $_POST['confirm_password']) != 0) {
 		$message = "Passwords do not match";
 	}
 	else {
