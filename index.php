@@ -17,7 +17,6 @@ if( isset($_SESSION['user_id']) ){
 		$user = $results;
 	}
 }
-
 ?>
 
 <!DOCTYPE html>
