@@ -42,11 +42,11 @@ function test_input($data) {
                         
                         <div class="form-group">
                             <label for="image">Upload image</label>
+                            <span class="error">* <?php echo $imageerr;?></span>
                             <div class="input-group mb-3">
                               <div class="custom-file">
                                 <input type="file" name="image" class="custom-file-input" id="inputGroupFile02">
                                 <label class="custom-file-label" for="inputGroupFile02">Choose file</label>
-                                <span class="error">* <?php echo $imageerr;?></span>
                               </div>
                             </div>
                         </div>
