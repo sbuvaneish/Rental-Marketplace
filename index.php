@@ -16,10 +16,10 @@ if( isset($_SESSION['user_id']) ){
 	if( count($results) > 0){
 		$user = $results;
 	}
-	$records = $conn->prepare('SELECT image from images');
+	//$records = $conn->prepare('SELECT image from images');
         //$contents = file_get_contents($file);
-        $base64   = base64_decode($contents);
-        echo $base64;
+        //$base64   = base64_decode($contents);
+        //echo $base64;
 }
 
 ?>
