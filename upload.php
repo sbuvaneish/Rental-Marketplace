@@ -55,7 +55,7 @@ function test_input($data) {
                         <div class="form-group">
                             <label for="description">Description</label>
                             <span class="error">* <?php echo $descriptionerr;?></span>
-                            <textarea name="description" class="form-control" placeholder="Your Description *" style="width: 100%; height: 150px;"></textarea>
+                            <textarea name="description" class="form-control" placeholder="Your Description" style="width: 100%; height: 150px;"></textarea>
                         </div>
                         
                         <div class="form-group">
@@ -92,7 +92,7 @@ function test_input($data) {
                 </div>
                 
                 <div class="form-group">
-                        <input type="submit" name="btnSubmit" class="btnContact" value="Submit" style="color:green"/>
+                        <input type="submit" name="btnSubmit" class="btnContact" value="Submit" style="background-color:green"/>
                 </div>
                 
             </form>
