@@ -16,7 +16,10 @@ if( isset($_SESSION['user_id']) ){
 	if( count($results) > 0){
 		$user = $results;
 	}
-
+	$records = $conn->prepare('SELECT image from images');
+        //$contents = file_get_contents($file);
+        $base64   = base64_decode($contents);
+        echo $base64;
 }
 
 ?>
@@ -29,6 +32,9 @@ if( isset($_SESSION['user_id']) ){
 	<link href='http://fonts.googleapis.com/css?family=Comfortaa' rel='stylesheet' type='text/css'>
 </head>
 <body>
+
+?<img src="<?php echo data_uri('elephant.png','image/png'); ?>" alt="An elephant" />
+
 
 	<div class="header">
 		<a href="/">Rental Marketplace</a>
