@@ -89,6 +89,9 @@ function test_input($data) {
                         </div>
                     </div>
                     
+                    <div class="form-group">
+                        <input type="submit" name="btnSubmit" class="btnContact" value="Submit" />
+                    </div>
                     
                 </div>
             </form>
