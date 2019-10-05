@@ -5,7 +5,7 @@
   $dbname = "heroku_2f6114e386eb6eb";
   $dbh = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
   $dbh->exec("SET NAMES utf8");
-  $q = $dbh->prepare("select image from images where id = 1");
+  $q = $dbh->prepare("select image from images where image_id = 1");
   $q->execute();
   $row = $q->fetch(PDO::FETCH_BOTH);
   echo $row["image"];
