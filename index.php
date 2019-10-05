@@ -16,12 +16,6 @@ if( isset($_SESSION['user_id']) ){
 	if( count($results) > 0){
 		$user = $results;
 	}
-	//$records = $conn->prepare('SELECT image from images');
-	//$records->execute();
-	//$results = $records->fetch(PDO::FETCH_ASSOC);
-        //$base64   = base64_decode($results);
-	//$im = imageCreateFromString($bin);
-        //echo $im;
 }
 
 ?>
