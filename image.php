@@ -8,6 +8,6 @@
   $q = $dbh->prepare("select image from images where id = 2");
   $q->execute();
   $row = $q->fetch(PDO::FETCH_BOTH);
-  echo $row["image"]
+  echo $row["image"];
   echo '<img src="data:image/png;base64,' . $row["image"] . '" />';
 ?>

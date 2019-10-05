@@ -36,7 +36,7 @@ function test_input($data) {
 <link rel="stylesheet" type="text/css" href="assets/css/upload.css">
 <div class="container contact-form">
             <form method="post" action = "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-                <h3>Drop Us a Message</h3>
+                <h3>Upload product</h3>
                <div class="row">
                     <div class="col-md-6">
                         
