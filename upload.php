@@ -43,6 +43,7 @@ function test_input($data) {
                         <div class="form-group">
                             <label for="image">Upload image</label>
                             <span class="error">* <?php echo $imageerr;?></span>
+                            <?php echo $image; ?>
                             <div class="input-group mb-3">
                               <div class="custom-file">
                                 <input type="file" name="image" class="custom-file-input" id="inputGroupFile02">
@@ -73,7 +74,7 @@ function test_input($data) {
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="product_name">Product name</label>
-                            <textarea name="product_name" class="form-control" placeholder="Name" style="width: 100%; height: 150px;"></textarea>
+                            <input type="text" name="product_name" class="form-control" placeholder="Name" value="" />
                         </div>
                         <div class="form-group">
                             <label for="product_brand">Brand</label>
@@ -91,9 +92,7 @@ function test_input($data) {
                     
                 </div>
                 
-                <div class="form-group">
-                        <input type="submit" name="btnSubmit" class="btnContact" value="Submit" style="background-color:green"/>
-                </div>
+                <input type="submit" name="btnSubmit" class="btnContact" value="Submit" style="background-color:green"/>
                 
             </form>
 </div>
