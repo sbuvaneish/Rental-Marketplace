@@ -50,14 +50,6 @@
         <li class=<?= ($_GET['file'] == 'rating.php') ? 'active' : ''?>><a href="main.php?file=rating.php">Rate Others</a></li>
         <li class=<?= ($_GET['file'] == 'index.php') ? 'active' : ''?>><a href="main.php?file=index.php">Logout</a></li>
       </ul><br>
-      <div class="input-group">
-        <input type="text" class="form-control" placeholder="Search Blog..">
-        <span class="input-group-btn">
-          <button class="btn btn-default" type="button">
-            <span class="glyphicon glyphicon-search"></span>
-          </button>
-        </span>
-      </div>
     </div>
 
     <div class="col-sm-9">
