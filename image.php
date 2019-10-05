@@ -9,5 +9,5 @@
   $q->execute();
   $row = $q->fetch(PDO::FETCH_BOTH);
   echo $row["image"];
-  echo '<img src="data:image/png;base64,' . $row["image"] . '" />';
+  echo '<img src="data:image/jpg;base64,' . $row["image"] . '" />';
 ?>
