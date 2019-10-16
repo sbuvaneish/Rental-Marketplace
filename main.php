@@ -1,6 +1,27 @@
 <?php
 
+session_start();
+
+if(!isset($_SESSION['user_id'])) {
+  header("Location: /login.php");
+}
+
+unset($_SESSION['product_id']);
+
+if(isset($_SESSION['insertion_flag'])) {
+  unset($_SESSION['insertion_flag']);
+  echo '<script type="text/javascript">alert("Product successfully created!");</script>';
+}
+
+if(isset($_SESSION['updation_flag'])){
+  unset($_SESSION['updation_flag']);
+  echo '<script type="text/javascript">alert("Product successfully updated!");</script>';
+}
+
+
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,6 +56,8 @@
       }
       .row.content {height: auto;} 
     }
+    
+    
   </style>
 </head>
 <body>
@@ -42,13 +65,14 @@
 <div class="container-fluid">
   <div class="row content">
     <div class="col-sm-3 sidenav">
-      <a href="main.php"><h4 style="color:orange">Rental Marketplace</h4></a>
+      <span style="float:right;color:green">Welcome, <?=$_SESSION['email']?></span>
+      <a href="main.php"><h4 style="color:green">Rental Marketplace</h4></a>
       <ul class="nav nav-pills nav-stacked">
-        <li class=<?= ($_GET['file'] == 'upload.php') ? 'active' : ''?>><a href="main.php?file=upload.php">Upload Product</a></li>
-        <li class=<?= ($_GET['file'] == 'view.php') ? 'active' : ''?>><a href="main.php?file=view.php">View My Products</a></li>
+        <li class=<?= ($_GET['file'] == 'upload.php') ? 'active' : ''?>><a href="upload.php">Upload Product</a></li>
+        <li class=<?= ($_GET['file'] == 'view.php') ? 'active' : ''?>><a href="view.php">View My Products</a></li>
         <li class=<?= ($_GET['file'] == 'search.php') ? 'active' : ''?>><a href="main.php?file=search.php">Search Product</a></li>
         <li class=<?= ($_GET['file'] == 'rating.php') ? 'active' : ''?>><a href="main.php?file=rating.php">Rate Others</a></li>
-        <li class=<?= ($_GET['file'] == 'index.php') ? 'active' : ''?>><a href="main.php?file=index.php">Logout</a></li>
+        <li class=<?= ($_GET['file'] == 'index.php') ? 'active' : ''?>><a href="index.php">Logout</a></li>
       </ul><br>
     </div>
 
