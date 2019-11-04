@@ -15,7 +15,9 @@ ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password
     -> BY 'password'; 
     
     
-    
+ALTER TABLE products
+  ADD COLUMN image_id INT NOT NULL,
+  ADD FOREIGN KEY (image_id) REFERENCES images(image_id) ON DELETE CASCADE;
     
 main.php source
 <!--
@@ -86,3 +88,120 @@ main.php source
 
 Register/login forms, pretty good ones in this link : https://mdbootstrap.com/docs/jquery/forms/basic/
 This link is good for other forms: https://www.mockplus.com/blog/post/bootstrap-form-template
+
+
+
+
+	// $records = $conn->prepare('SELECT image from images');
+	// $records->execute();
+ //       $results = $records->fetch(PDO::FETCH_ASSOC);
+	// echo $results['image'];
+	
+	
+	
+	
+	
+                            <!--<div class="input-group mb-3">-->
+                            <!--  <div class="custom-file">-->
+                            <!--    <input type="file" name="image" class="custom-file-input" id="inputGroupFile02">-->
+                            <!--    <?php //echo $image_upload ?>-->
+                            <!--    <label class="custom-file-label" for="inputGroupFile02">Choose file</label>-->
+                            <!--  </div>-->
+                          
+
+                              
+                              
+                            <!--</div>-->
+                            
+                            <!--
+                            <input type="submit" name="btnSubmit1" value="Upload"/>
+                            -->
+                            
+                            
+                            
+                            
+$file_ext = strtolower(end(explode('.',$_FILES['fileToUpload']['name'])));
+      
+    $extensions = array("jpeg","jpg","png");
+      
+    if(in_array($file_ext,$extensions)=== false){
+       $imagerr = "Extension not allowed, please choose a JPEG or PNG file.";
+    }
+      
+    $check = file_get_contents($_FILES["fileToUpload"]["tmp_name"]);
+    if($check === FALSE) {
+        $imagerr = "File is not an image";
+    }
+    
+    
+    
+function test_input($data) {
+  $data = trim($data);
+  $data = stripslashes($data);
+  $data = htmlspecialchars($data);
+  return $data;
+}
+
+
+
+	    
+	    
+	   // $check_query = "select image from products where product_id = 7";
+	   // $records = $conn->prepare($check_query);
+	   // $records->execute();
+	   // $results = $records->fetchAll(PDO::FETCH_ASSOC);
+	   // $image_content = $results[0]['image'];
+	   
+	   
+	   
+	   upload.php?product_id=<?=$results[$index]["product_id"]?>
+	   
+	   
+	   <!--<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="assets/css/upload.css">
+<h3>
+    Here are your products!!
+</h3>
+<body>
+
+<?php for($index = 0; $index < count($results); $index++) { ?>
+<div class="container contact-form">
+<div class="list-group" style="background-color:yellow">
+    <img height="100" width="100" src="data:image/jpg;base64,<?=$results[$index]["image"]?>" />
+    Description: <?= $results[$index]["description"] ?><br>
+    Availability: <?= ($results[$index]["is_available"]) ? "Yes" : "No" ?><br>
+    Date of Upload: <?= explode(" ", $results[$index]["datetime"])[0] ?>
+    <a href="#" class="list-group-item list-group-item-action active"> Click Me!</a>
+</div>
+<?php } ?>
+</div>
+</body>
+</html>-->
+
+
+
+  
+  
+  
+<?php if($_POST["image_submit"]) { ?>
+                            <img src="<?= $_POST['image_url'] ?>" width="250" height="200" />
+                            <?php } ?>
+                            <?php else if($_SESSION["product_id"]) { ?>
+                            <?php if($_POST['image_url']) {
+                              
+                              $image_val = base64_encode(file_get_contents($_POST['image_url']));
+                            }
+                            ?>
+                            
+                            <img height="100" width="100" src="data:image/jpg;base64,<?= $image_val?>" />
+                            <?php } ?>
+                            
+                            
+                          <li> User rating
+          <div class="slidecontainer">
+              <input type="range" min="0" max="500" value="0" class="slider" name="slider" id="myRange" onchange='document.getElementById("demo").value = document.getElementById("myRange").value /100;'>
+              <input type="text" id="demo" value="0" disabled />
+          </div>
+          </li>

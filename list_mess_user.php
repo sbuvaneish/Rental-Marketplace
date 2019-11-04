@@ -40,21 +40,52 @@ else{
 $records->execute();
 $row = $records->fetchAll(PDO::FETCH_ASSOC);
 
-echo "<table border='1'>
-<tr>
-<th>From</th>
-<th>To</th>
-<th>Message</th>
-<th>Time</th>
-</tr>";
+// echo "<table border='1'>
+// <tr>
+// <th>From</th>
+// <th>To</th>
+// <th>Message</th>
+// <th>Time</th>
+// </tr>";
 
-foreach ($row as $val){ 
-    echo "<tr>";
-    echo "<td>" . $val['u1'] . "</td>";
-    echo "<td>" . $val['u2'] . "</td>";
-    echo "<td>" . $val['message'] . "</td>";
-    echo "<td>" . $val['time'] . "</td>";
-} 
+// foreach ($row as $val){ 
+//     echo "<tr>";
+//     echo "<td>" . $val['u2'] . "</td>";
+//     echo "<td>" . $val['u1'] . "</td>";
+//     echo "<td>" . $val['message'] . "</td>";
+//     echo "<td>" . $val['time'] . "</td>";
+// } 
 
-echo "</table>";
+// echo "</table>";
 ?>
+
+<!DOCTYPE html>
+<html>
+<title>W3.CSS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<body>
+
+<div class="w3-container">
+  <h2>Messages</h2>
+  <table class="w3-table-all w3-hoverable" style="table-layout: fixed; width: 100%">
+    <tr>
+        <th>From</th>
+        <th>To</th>
+        <th>Message</th>
+        <th>Time</th>
+    </tr>
+    <?php
+    foreach ($row as $val){ ?>
+        <tr>
+        <td>"<?=$val['u2']?>"</td>
+        <td>"<?=$val['u1']?>"</td>
+        <td style="word-wrap: break-word">"<?=$val['message']?>"</td>
+        <td>"<?=$val['time']?>"</td>
+        </tr>
+    <?php } ?>
+  </table>
+</div>
+
+</body>
+</html>

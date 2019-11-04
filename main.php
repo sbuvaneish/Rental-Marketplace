@@ -71,9 +71,9 @@ if(isset($_SESSION['updation_flag'])){
         <li class=<?= ($_GET['file'] == 'upload.php') ? 'active' : ''?>><a href="upload.php">Upload Product</a></li>
         <li class=<?= ($_GET['file'] == 'view.php') ? 'active' : ''?>><a href="view.php">View My Products</a></li>
         <li class=<?= ($_GET['file'] == 'search.php') ? 'active' : ''?>><a href="main.php?file=search.php">Search Product</a></li>
-        <li class=<?= ($_GET['file'] == 'rating.php') ? 'active' : ''?>><a href="main.php?file=rating.php">Rate Others</a></li>
+        <li class=<?= ($_GET['file'] == 'messaging.php') ? 'active' : ''?>><a href="messaging.php">Message</a></li>
         <li class=<?= ($_GET['file'] == 'index.php') ? 'active' : ''?>><a href="index.php">Logout</a></li>
-      </ul><br>
+        </ul><br>
     </div>
 
     <div class="col-sm-9">

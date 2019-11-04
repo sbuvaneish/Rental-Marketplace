@@ -44,21 +44,14 @@ if(isset($_GET['product_id'])) {
   $brand_val = $view_results[0]["brand"];
   $color_val = $view_results[0]["color"];
   $price_val = $view_results[0]["price"];
+  $product_id = $view_results[0]["product_id"];
   
-  
-  $query = "SELECT u.id from users u, owns o where o.product_id = :product_id and u.id = o.user_id";
+  $query = "SELECT u.username from users u, owns o where o.product_id = :product_id and u.id = o.user_id";
   $records = $conn->prepare($query);
-  $records->bindParam(':product_id', $_GET['product_id']);
+  $records->bindParam(':product_id', $product_id);
   $records->execute();
   $view_results = $records->fetchAll(PDO::FETCH_ASSOC);
-  $id = $view_results[0]["id"];
-  
-  if($id != $_SESSION['user_id']){
-    $url =  "https://".$_SERVER['HTTP_HOST']."/upload_non_editable.php?product_id=".$_GET['product_id'];
-    header("Refresh: 0.1;url=".$url);
-    return;
-  }
-  
+  $email = $view_results[0]["username"];
   //store the image into the session so as to keep displaying in the form
   $_SESSION['image_val'] = $image_val;
   
@@ -223,20 +216,13 @@ else if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <!------ Include the above in your HEAD tag ---------->
 <link rel="stylesheet" type="text/css" href="assets/css/upload.css">
 <div class="container contact-form">
-            <form enctype="multipart/form-data" method="post" action ="upload.php">
-                <h3>Upload or update product information</h3>
+            <form enctype="multipart/form-data" method="post" action="message.php">
+                <h3>Product Information</h3>
                 <span class="error" style="color:red"> <?php echo $insertionerr;?></span>
                <div class="row">
                     <div class="col-md-6">
                         
                         <div class="form-group">
-                            <label for="image">Upload image</label>
-                            <span class="error" style="color:red">* <?php echo $imagerr;?></span>
-                            
-                            <form action="upload.php" method="POST" enctype="multipart/form-data">
-                               <input type="text" name="image_url" class="form-control" placeholder="Image URL" value="<?=$_POST['image_url']?>" />
-                               <input type="submit" name="image_submit" value="check" />
-                            </form>
                             <br><br>
                             
                             <!-- display image in URL if valid when the check button is clicked -->
@@ -260,15 +246,13 @@ else if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                         <div class="form-group">
                             <label for="description">Description</label>
-                            <span class="error" style="color:red">* <?php echo $descriptionerr;?></span>
-                            <textarea name="description" class="form-control" placeholder="Your Description" style="width: 100%; height: 150px;"><?= $description_val?></textarea>
+                            <textarea name="description" class="form-control" placeholder="Your Description" style="width: 100%; height: 150px;" readonly><?= $description_val?></textarea>
                         </div>
                         
                         <div class="form-group">
                           <label for="availability">Availability</label>
-                          <span class="error" style="color:red">* <?php echo $availabilityerr;?></span>
-                          <label class="radio-inline"><input type="radio" value="yes" name="availability" <?php if ($availability_val === 1){echo "checked";}?> >Yes</label>
-                          <label class="radio-inline"><input type="radio" value="no" name="availability" <?php if ($availability_val === 0){echo "checked";}?> >No</label>
+                          <label class="radio-inline"><input type="radio" value="yes" name="availability" <?php if ($availability_val === 1){echo "checked";} else{echo "disabled";}?> >Yes</label>
+                          <label class="radio-inline"><input type="radio" value="no" name="availability" <?php if ($availability_val === 0){echo "checked";} else{echo "disabled";}?> >No</label>
                         </div>
                         
                         
@@ -279,26 +263,26 @@ else if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="product_name">Product name</label>
-                            <input type="text" name="product_name" class="form-control" placeholder="Name" value="<?= $name_val ?>" />
+                            <input type="text" name="product_name" class="form-control" placeholder="Name" value="<?= $name_val ?>" readonly />
                         </div>
                         <div class="form-group">
                             <label for="product_brand">Brand</label>
-                            <input type="text" name="product_brand" class="form-control" placeholder="Brand" value="<?= $brand_val ?>" />
+                            <input type="text" name="product_brand" class="form-control" placeholder="Brand" value="<?= $brand_val ?>" readonly />
                         </div>
                         <div class="form-group">
                             <label for="product_color">Color</label>
-                            <input type="text" name="product_color" class="form-control" placeholder="Color" value="<?= $color_val?>" />
+                            <input type="text" name="product_color" class="form-control" placeholder="Color" value="<?= $color_val?>" readonly />
                         </div>
                         <div class="form-group">
                             <label for="product_price">Price</label>
-                            <input type="text" name="product_price" class="form-control" placeholder="Price" value="<?= $price_val?>" />
+                            <input type="text" name="product_price" class="form-control" placeholder="Price" value="<?= $price_val?>" readonly />
                         </div>
-                  
-                <input type="submit" name="autoFillSubmit" class="btnContact" value="Autofill" style="background-color:orange"/>
-                <br><br>
-                <input type="submit" name="btnSubmit" class="btnContact" value="Submit" style="background-color:green"/>
+                        <div>
+                            <input type="hidden" name="myEmail" value="<?php echo $email?>" />
+                            <input type="submit" value="Message User" />
+                        </div>
                   </div>
-                    
                 </div>
+               
             </form>
 </div>

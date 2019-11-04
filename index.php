@@ -28,26 +28,41 @@ if( isset($_SESSION['user_id']) ){
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
 	<link href='http://fonts.googleapis.com/css?family=Comfortaa' rel='stylesheet' type='text/css'>
 </head>
+	<style>
+	img {
+	  opacity: 0.2;
+  	  filter: alpha(opacity=25);
+	}
+	.centered {
+	  position: absolute;
+	  top: 50%;
+	  left: 50%;
+	  transform: translate(-50%, -50%);
+	}
+</style>
+
 <body>
-
-	<div class="header">
-		<a href="/">Rental Marketplace</a>
+	<div class="container">
+		<img src="img.jpg" alt="Pineapple" width="1500" height="818">
+		<div class="centered">
+			<a href="/">Rental Marketplace</a>
+			<?php if( !empty($user) ): ?>
+	
+			<br />Welcome <?= $user['email']; ?> 
+			<br /><br />You are successfully logged in!
+			<br /><br />
+			<a href="logout.php">Logout?</a>
+	
+			<?php else: ?>
+	
+				<h1>Please Login or Register</h1>
+				<a href="login.php">Login</a> or
+				<a href="register.php">Register</a>
+	
+			<?php endif; ?>
+		</div>
 	</div>
-
-	<?php if( !empty($user) ): ?>
-
-		<br />Welcome <?= $user['email']; ?> 
-		<br /><br />You are successfully logged in!
-		<br /><br />
-		<a href="logout.php">Logout?</a>
-
-	<?php else: ?>
-
-		<h1>Please Login or Register</h1>
-		<a href="login.php">Login</a> or
-		<a href="register.php">Register</a>
-
-	<?php endif; ?>
-
 </body>
 </html>
+
+

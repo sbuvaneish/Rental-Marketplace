@@ -1,0 +1,1 @@
+[['brand'=>'nike', 'color'=>'blue'], ['brand'=>'nike', 'color'=>'red'], ['brand'=>'adidas', 'color'=>'blue'], ['brand'=>'adidas', 'color'=>'red']]
