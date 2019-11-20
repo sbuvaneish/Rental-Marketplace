@@ -10,7 +10,7 @@ Srujana Bhaskarabhatta <br>
 
 App Images:
 
-![Upload Product](a.png | width=100) <br> <br>
+<img src = "a.png">
 ![View my products](c.png) <br> <br>
 ![Search Products](d.png) <br> <br>
 ![More info on products](e.png) <br> <br>
