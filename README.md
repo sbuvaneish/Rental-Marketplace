@@ -10,7 +10,7 @@ Srujana Bhaskarabhatta <br>
 
 App Images:
 
-![Screenshot](a.png)
-![Screenshot](b.png)
-![Screenshot](c.png)
-![Screenshot](d.png)
+![Screenshot](a.png) <br> <br>
+![Screenshot](b.png) <br> <br>
+![Screenshot](c.png) <br> <br>
+![Screenshot](d.png) <br> <br>
