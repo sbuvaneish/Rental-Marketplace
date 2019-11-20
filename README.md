@@ -10,7 +10,7 @@ Srujana Bhaskarabhatta <br>
 
 App Images:
 
-![Screenshot](a.png) <br> <br>
-![Screenshot](c.png) <br> <br>
-![Screenshot](d.png) <br> <br>
-![Screenshot](e.png) <br> <br>
+![Upload Product](a.png) <br> <br>
+![View my products](c.png) <br> <br>
+![Search Products](d.png) <br> <br>
+![More info on products](e.png) <br> <br>
