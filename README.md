@@ -11,6 +11,6 @@ Srujana Bhaskarabhatta <br>
 App Images:
 
 <img src = "a.png" height = 500 width = 700> <br> <br>
-<img src = "c.png" height = 500 width = 700> <br> <br>
-<img src = "d.png" height = 500 width = 700> <br> <br>
+<img src = "c.png" height = 400 width = 700> <br> <br>
+<img src = "d.png" height = 400 width = 700> <br> <br>
 <img src = "e.png" height = 500 width = 700> <br> <br>
