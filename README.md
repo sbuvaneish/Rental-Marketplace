@@ -10,7 +10,7 @@ Srujana Bhaskarabhatta <br>
 
 App Images:
 
-<img src = "a.png" height = 100 width = 100>
+<img src = "a.png" height = 1000 width = 1000>
 ![View my products](c.png) <br> <br>
 ![Search Products](d.png) <br> <br>
 ![More info on products](e.png) <br> <br>
