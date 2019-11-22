@@ -5,6 +5,12 @@ if(isset($_POST['myEmail'])){
 	$rec_email = $_POST['myEmail'];
 }
 
+// if(isset($_SESSION['message_flag'])) {
+//   unset($_SESSION['message_flag']);
+//   echo '<script type="text/javascript">alert("Product successfully created!");</script>';
+// }
+
+
 ?>
 
 <!DOCTYPE html>

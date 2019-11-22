@@ -48,7 +48,7 @@ if(isset($_POST['search_submit']) and $_POST['search']) {
   }
   
   
-  $search_query = "SELECT users.username, products.image, products.product_id, products.name, products.brand, products.color, products.price, products.description, products.is_available, owns.created_at AS datetime FROM products JOIN owns ON owns.product_id = products.product_id JOIN users ON users.id = owns.user_id WHERE products.name = :product AND (users.username LIKE CONCAT('%', :renter, '%')) AND (owns.user_id <> :this_id)";
+  $search_query = "SELECT users.username, products.product_id, products.image, products.name, products.brand, products.color, products.price, products.description, products.is_available, owns.created_at AS datetime FROM products JOIN owns ON owns.product_id = products.product_id JOIN users ON users.id = owns.user_id WHERE products.name = :product AND (users.username LIKE CONCAT('%', :renter, '%')) AND (owns.user_id <> :this_id)";
   
   if(isset($_POST['availability'])) {
     $search_query = $search_query . " AND (products.is_available = :is_available)";
@@ -56,6 +56,7 @@ if(isset($_POST['search_submit']) and $_POST['search']) {
   if(!empty($_POST['price'])) {
     $search_query = $search_query . " AND (products.price <= :price)";
   }
+  
   
   $search_records = $conn->prepare($search_query);
   $search_records->bindParam(':product', $product);
@@ -72,11 +73,46 @@ if(isset($_POST['search_submit']) and $_POST['search']) {
   $search_records->execute();
   $search_results = $search_records->fetchAll(PDO::FETCH_ASSOC);
   
-  $json_search_results = addslashes(json_encode($search_results));
+  
+  
+  
+  $send_dict = [];
+  
+  foreach($search_results as $row) {
+    
+    array_push($send_dict, array('product_id' => $row['product_id'], 'brand' => $row['brand'], 'color' => $row['color']));
+    
+  }
+  
+  
+  
+  
+  $json_search_results = addslashes(json_encode($send_dict));
   $json_search = addslashes(json_encode($tagged_query));
   $op = "";
+  // echo $json_search_results;
+  // echo $json_search;
   exec("python3 /home/ec2-user/environment/project/Rental-Marketplace/sort.py \"{$json_search_results}\" \"{$json_search}\"", $op);
   $ranked_results = json_decode($op[0],$assoc=TRUE);
+  
+  
+  
+  $new_ranked_results = [];
+  
+  
+  foreach($ranked_results as $row) {
+    
+    for($i=0; $i<count($search_results); $i++) {
+      if($search_results[$i]['product_id'] == $row['product_id']) {
+        array_push($new_ranked_results, $search_results[$i]);
+        break;
+      }
+    }
+    
+  }
+  
+
+  
 
 }
 else if(isset($_POST['search_submit'])) {
@@ -229,12 +265,11 @@ else if(isset($_POST['search_submit'])) {
     </div>
 
     <div class="col-sm-9">
-      
       <?php if(isset($_POST['search_submit'])) { ?>
-      <h1>Search Results: <?=count($search_results);?></h1>
+      <h1>Search Results: <?=count($new_ranked_results);?></h1>
       <?php } ?>
       
-      <?php foreach($ranked_results as $record) : ?>
+      <?php foreach($new_ranked_results as $record) : ?>
       
       
       <div class="row">
@@ -243,7 +278,7 @@ else if(isset($_POST['search_submit'])) {
               
                 
                 <div class="product-image">
-                  <img height="100" width="100" src="data:image/jpg;base64,<?=$record["image"]?>" />
+                  <img height="100" width="100" src="data:image/jpg;base64,<?php echo $record["image"]?>" />
                 </div>
               
                 

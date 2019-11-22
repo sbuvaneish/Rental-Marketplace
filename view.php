@@ -9,6 +9,7 @@ if(!isset($_SESSION['user_id'])) {
 unset($_SESSION['product_id']);
 
 require 'database.php';
+require 'tagger.php';
 
 $description_search = "";
 
@@ -16,11 +17,14 @@ if(isset($_POST['search_submit'])) {
     $description_search = $_POST['search'];
 }
 
-$query = "SELECT products.product_id as product_id, image, description, is_available, owns.created_at as datetime FROM products JOIN owns on owns.user_id = :user_id AND owns.product_id = products.product_id AND description LIKE CONCAT('%', :description_search, '%')";
+$product_name = getTagDescription($description_search)['product'];
+
+$query = "SELECT products.product_id as product_id, image, description, is_available, owns.created_at as datetime FROM products JOIN owns on owns.user_id = :user_id AND owns.product_id = products.product_id AND (description LIKE CONCAT('%', :description_search, '%') OR products.name = :product_name)";
 
 $records = $conn->prepare($query);
 $records->bindParam(':user_id', $_SESSION['user_id']);
 $records->bindParam(':description_search', $description_search);
+$records->bindParam(':product_name', $product_name);
 $records->execute();
 $results = $records->fetchAll(PDO::FETCH_ASSOC);
 

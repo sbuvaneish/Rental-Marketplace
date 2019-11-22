@@ -74,7 +74,7 @@ else if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
   
   //Submission of product information
-  if(isset($_POST['btnSubmit']) or isset($_POST['autoFillSubmit'])) {
+  if(isset($_POST['btnSubmit']) or isset($_POST['autoFillSubmit']) or isset($_POST['colorSubmit'])) {
     
     $description_val = $_POST['description'];
     if($_POST['availability'] == 'yes') {
@@ -102,6 +102,42 @@ else if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $name_val = $tagged_query['product'] ? $tagged_query['product'] : $name_val;
       $brand_val = $tagged_query['brand'] ? $tagged_query['brand'] : $brand_val;
       $color_val = $tagged_query['color'] ? $tagged_query['color'] : $color_val;
+    }
+    else if(isset($_POST['colorSubmit'])) {
+      $availabilityerr = $descriptionerr = "";
+      
+      if(!isset($_SESSION['image_val']) and empty($_POST['image_url'])) {
+        $imagerr = "Invalid URL, please choose a JPEG or PNG file.";
+      }
+      else {
+        if(!empty($_POST['image_url'])) {
+          $image_val = base64_encode(file_get_contents($_POST['image_url']));
+          
+          $send = addslashes(json_encode($image_val));
+          exec("python3.4 /home/ec2-user/environment/project/Rental-Marketplace/color.py \"{$send}\"", $op);
+
+          $result = json_decode($op[0], $assoc=TRUE);
+          $color_val = $result[1];
+          
+        }
+        else {
+          
+          $send = addslashes(json_encode($_SESSION['image_val']));
+          $op="";
+          exec("python3.4 /home/ec2-user/environment/project/Rental-Marketplace/color.py \"{$send}\"", $op);
+          $result = json_decode($op[0], $assoc=TRUE);
+          $color_val = $result[1];
+          
+          // if(strpos($result[0], 'white') !== false) {
+          //   $color_val = $result[1];
+          // }
+          // else {
+          //   $color_val = $result[0];
+          // }
+          
+        }
+      }
+      
     }
     
     //In terms of URL, either it should be empty or valid.
@@ -241,7 +277,7 @@ else if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             
                             <!-- display image in URL if valid when the check button is clicked -->
                             <?php if(isset($_POST['image_submit']) and !$imagerr) {
-                                $image_val = base64_encode(file_get_contents($_POST['image_url']));?>
+                                $image_val = base64_encode(file_get_contents($_POST['image_url']));; ?>
                                 <img height="100" width="100" src="data:image/jpg;base64,<?= $image_val?>" />
                             <?php } ?>
                             
@@ -295,6 +331,8 @@ else if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         </div>
                   
                 <input type="submit" name="autoFillSubmit" class="btnContact" value="Autofill" style="background-color:orange"/>
+                <br><br>
+                <input type="submit" name="colorSubmit" class="btnContact" value="Get color from image" style="background-color:blue"/>
                 <br><br>
                 <input type="submit" name="btnSubmit" class="btnContact" value="Submit" style="background-color:green"/>
                   </div>
