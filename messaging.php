@@ -120,21 +120,31 @@ form.example::after {
 <body>
   <br>
   <br>
+
+
+<br>
+<a href="main.php" style="color:#0000FF">Back to main page</a>
+<br><br><br>
+  
+  
   <!--<form id="form1" >-->
 <!--    <input type="button" onclick="submitForm('list_messages.php')" value="List" style="padding: 50x 100px"/>
 -->   
 <!--<input type="button" onclick="submitForm('message.php')" value="Send" style="padding: 50x 100px"/>-->
     <!-- The form -->
     <form class="example" action="messaging.php" method = "POST">
+
       <input type="text" placeholder="Search.." name="search" value="<?=$_POST['search']?>"> 
-      <input type="submit" value="submit" name="submit"><!--<i class="fa fa-search"></i> -->
-      <input type="submit" action="message.php" method = "POST" name = "Send" value="Send" style="padding: 50x 100px"/>
+      <input type="submit" value="Submit" name="submit"><!--<i class="fa fa-search"></i> -->
+      <br>
     </form>
+    <form class ='write_message' action = "message.php" method="POST">
+      <input type="submit" action="message.php" method = "POST" name = "Send" value="Send A Message" style="padding: 50x 100px"/>
   </form>
 </body>
 
 <div class="w3-container">
-  <h2>Messages</h2>
+  <h2>All My Messages</h2>
   <table class="w3-table-all w3-hoverable" style="table-layout: fixed; width: 100%">
     <tr>
         <th>From</th>

@@ -209,6 +209,9 @@ else if(isset($_POST['search_submit'])) {
         <a href="main.php"><h4 style="color:green">Search Product Page</h4></a>
       <span style="float:right;color:green">Welcome, <?=$_SESSION['email']?></span>
       
+      <br>
+      <a href="main.php">Back to main page</a>
+      <br><br><br>
       
       <form action="/search.php" method="post">
           <input type="text" placeholder="Search.." name="search" value="<?=$_POST['search']?>">

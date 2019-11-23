@@ -68,20 +68,37 @@ if(isset($_SESSION['updation_flag'])){
       <span style="float:right;color:green">Welcome, <?=$_SESSION['email']?></span>
       <a href="main.php"><h4 style="color:green">Rental Marketplace</h4></a>
       <ul class="nav nav-pills nav-stacked">
-        <li class=<?= ($_GET['file'] == 'upload.php') ? 'active' : ''?>><a href="upload.php">Upload Product</a></li>
-        <li class=<?= ($_GET['file'] == 'view.php') ? 'active' : ''?>><a href="view.php">View My Products</a></li>
-        <li class=<?= ($_GET['file'] == 'search.php') ? 'active' : ''?>><a href="main.php?file=search.php">Search Product</a></li>
-        <li class=<?= ($_GET['file'] == 'messaging.php') ? 'active' : ''?>><a href="messaging.php">Message</a></li>
-        <li class=<?= ($_GET['file'] == 'index.php') ? 'active' : ''?>><a href="index.php">Logout</a></li>
+        <li><a href="upload.php">Upload Product</a></li>
+        <li><a href="view.php">View My Products</a></li>
+        <li><a href="search.php">Search Product</a></li>
+        <li><a href="messaging.php">Message</a></li>
+        <li><a href="index.php">Logout</a></li>
         </ul><br>
     </div>
 
+    <h1>
+      Guide to Rental Marketplace.
+      <h3>
+        Upload Product: 
+      </h3>
+      <h3>
+        View my Product: 
+      </h3>
+      <h3>
+        Search Product: 
+      </h3>
+      <h3>
+        Message User: 
+      </h3>
+    </h1>
     <div class="col-sm-9">
       <?php include $_GET['file'] ?>
     </div>
   </div>
 </div>
 
-
+ <footer>
+  Contact us at adminrentalmarketplace@gmail.com
+ </footer>
 </body>
 </html>

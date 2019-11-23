@@ -42,6 +42,12 @@ $results = $records->fetchAll(PDO::FETCH_ASSOC);
 <div class="container">
     <h3 class="h3" style="color:green">Here are your Products!!</h3>
     <span style="float:right;color:green">Welcome, <?=$_SESSION['email']?></span>
+    
+    <br>
+    <a href="main.php">Back to main page</a>
+    <br><br><br>
+    
+    
     <form action="/view.php" method="post">
       <input type="text" placeholder="Search.." name="search" value="<?=$_POST['search']?>">
       <input type="submit" name="search_submit" value="Submit"/>

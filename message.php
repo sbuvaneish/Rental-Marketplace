@@ -14,7 +14,13 @@ if(isset($_POST['myEmail'])){
 ?>
 
 <!DOCTYPE html>
+
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+<br>
+<a href="main.php">Back to main page</a>
+<br><br><br>
+
 <div class="container">
 	<form method="POST" action="send.php">
 		<div><label>Receiver Email:</label></div>

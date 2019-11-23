@@ -6,6 +6,10 @@ if(!isset($_SESSION['user_id'])) {
   header("Location: /login.php");
 }
 
+if($_SERVER["REQUEST_METHOD"] == "GET" and !isset($_GET['product_id'])) {
+  unset($_SESSION['image_val']);
+}
+
 require 'database.php';
 require 'tagger.php';
 
@@ -103,7 +107,8 @@ else if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $brand_val = $tagged_query['brand'] ? $tagged_query['brand'] : $brand_val;
       $color_val = $tagged_query['color'] ? $tagged_query['color'] : $color_val;
     }
-    else if(isset($_POST['colorSubmit'])) {
+    
+    if(isset($_POST['colorSubmit'])) {
       $availabilityerr = $descriptionerr = "";
       
       if(!isset($_SESSION['image_val']) and empty($_POST['image_url'])) {
@@ -247,6 +252,11 @@ else if ($_SERVER["REQUEST_METHOD"] == "POST") {
   
   }
   
+  if(empty($imagerr)) {
+    if(isValidURL($_POST['image_url'])) {
+      $_SESSION['image_val'] = base64_encode(file_get_contents($_POST['image_url']));
+    }
+  }
   
 }
 
@@ -261,6 +271,9 @@ else if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <div class="container contact-form">
             <form enctype="multipart/form-data" method="post" action ="upload.php">
                 <h3>Upload or update product information</h3>
+                <br>
+                <a href="main.php">Back to main page</a>
+                <br><br><br>
                 <span class="error" style="color:red"> <?php echo $insertionerr;?></span>
                <div class="row">
                     <div class="col-md-6">
@@ -275,19 +288,7 @@ else if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             </form>
                             <br><br>
                             
-                            <!-- display image in URL if valid when the check button is clicked -->
-                            <?php if(isset($_POST['image_submit']) and !$imagerr) {
-                                $image_val = base64_encode(file_get_contents($_POST['image_url']));; ?>
-                                <img height="100" width="100" src="data:image/jpg;base64,<?= $image_val?>" />
-                            <?php } ?>
-                            
-                            <!--For get request from view product page-->
-                            <?php if(isset($_GET['product_id'])) { ?>
-                              <img height="100" width="100" src="data:image/jpg;base64,<?= $image_val?>" />
-                            <?php } ?>
-                            
-                            <!--If it's the post request from final submit, then old image is shown only if URL is empty-->
-                            <?php if(isset($_POST['btnSubmit']) and !$_POST['image_url'] and isset($_SESSION['product_id'])) { ?>
+                            <?php if(isset($_SESSION['image_val'])) { ?>
                               <img height="100" width="100" src="data:image/jpg;base64,<?= $_SESSION['image_val']?>" />
                             <?php } ?>
                             
@@ -332,11 +333,14 @@ else if ($_SERVER["REQUEST_METHOD"] == "POST") {
                   
                 <input type="submit" name="autoFillSubmit" class="btnContact" value="Autofill" style="background-color:orange"/>
                 <br><br>
-                <input type="submit" name="colorSubmit" class="btnContact" value="Get color from image" style="background-color:blue"/>
+                <input type="submit" name="colorSubmit" class="btnContact" value="Get Color" style="background-color:blue"/>
                 <br><br>
                 <input type="submit" name="btnSubmit" class="btnContact" value="Submit" style="background-color:green"/>
                   </div>
                     
                 </div>
             </form>
+            <br>
+            <a href="main.php">Back to main page</a>
+            <br>
 </div>

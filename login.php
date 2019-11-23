@@ -44,7 +44,7 @@ endif;
 <form class="form-horizontal" action='' method="POST">
   <fieldset>
     <div id="legend">
-      <legend class="" style="color:green">Rental Marketplace: It's fun to rent!!</legend>
+      <legend class="" style="color:green">Rental Marketplace: It's fun to rent</legend>
     </div>
     
     <div>
