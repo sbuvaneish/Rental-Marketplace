@@ -65,8 +65,8 @@ if(isset($_SESSION['updation_flag'])){
 <div class="container-fluid">
   <div class="row content">
     <div class="col-sm-3 sidenav">
-      <span style="float:right;color:green">Welcome, <?=$_SESSION['email']?></span>
       <a href="main.php"><h4 style="color:green">Rental Marketplace</h4></a>
+      <span style="float:right;color:green">Welcome, <?=$_SESSION['email']?></span><br>
       <ul class="nav nav-pills nav-stacked">
         <li><a href="upload.php">Upload Product</a></li>
         <li><a href="view.php">View My Products</a></li>
@@ -75,6 +75,7 @@ if(isset($_SESSION['updation_flag'])){
         <li><a href="index.php">Logout</a></li>
         </ul><br>
     </div>
+    
 
     <h1>
       Guide to Rental Marketplace.
@@ -91,9 +92,6 @@ if(isset($_SESSION['updation_flag'])){
         Message User: 
       </h3>
     </h1>
-    <div class="col-sm-9">
-      <?php include $_GET['file'] ?>
-    </div>
   </div>
 </div>
 

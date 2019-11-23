@@ -43,9 +43,8 @@ if(isset($_POST['search_submit']) and $_POST['search']) {
   else if($_POST['availability'] == 'no') {
     $availability = "0";
   }
-  if(isset($_POST['renter'])) {
-    $renter = $_POST['renter'];
-  }
+  
+  $renter = $_POST['search_drop'] ? $_POST['search_drop'] : $_POST['renter'];
   
   
   $search_query = "SELECT users.username, products.product_id, products.image, products.name, products.brand, products.color, products.price, products.description, products.is_available, owns.created_at AS datetime FROM products JOIN owns ON owns.product_id = products.product_id JOIN users ON users.id = owns.user_id WHERE products.name = :product AND (users.username LIKE CONCAT('%', :renter, '%')) AND (owns.user_id <> :this_id)";
@@ -54,7 +53,7 @@ if(isset($_POST['search_submit']) and $_POST['search']) {
     $search_query = $search_query . " AND (products.is_available = :is_available)";
   }
   if(!empty($_POST['price'])) {
-    $search_query = $search_query . " AND (products.price <= :price)";
+    $search_query = $search_query . " AND (products.price IS NULL or (products.price <= :price))";
   }
   
   
@@ -90,8 +89,6 @@ if(isset($_POST['search_submit']) and $_POST['search']) {
   $json_search_results = addslashes(json_encode($send_dict));
   $json_search = addslashes(json_encode($tagged_query));
   $op = "";
-  // echo $json_search_results;
-  // echo $json_search;
   exec("python3 /home/ec2-user/environment/project/Rental-Marketplace/sort.py \"{$json_search_results}\" \"{$json_search}\"", $op);
   $ranked_results = json_decode($op[0],$assoc=TRUE);
   
@@ -132,6 +129,7 @@ else if(isset($_POST['search_submit'])) {
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
   <style>
     /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
     .row.content {height: 1500px}
@@ -221,19 +219,13 @@ else if(isset($_POST['search_submit'])) {
       <br>
      
       <ul class="nav nav-pills nav-stacked">
-          <!--<li> User rating-->
-          <!--<div class="slidecontainer">-->
-          <!--    <input type="range" min="0" max="500" value="0" class="slider" name="slider" id="myRange" onchange='document.getElementById("demo").value = document.getElementById("myRange").value /100;'>-->
-          <!--    <input type="text" id="demo" value="0" disabled />-->
-          <!--</div>-->
-          <!--</li>-->
           <li>Price <input type="text" name="price" value="<?=$_POST['price']?>"></li>
           <li>Availability 
           <label class="radio-inline"><input type="radio" name="availability" value="yes" <?php if ($availability === "1"){echo "checked";}?> >Yes</label>
           <label class="radio-inline"><input type="radio" name="availability" value="no" <?php if ($availability === "0"){echo "checked";}?> >No</label></li>
           <li onclick="myFunction()" class="dropbtn" >Renter Name
            <div id="myDropdown" class="dropdown-content">
-          <input type="text" placeholder="Search.." name="search_drop" value="<?= $_POST['search_drop']?>" id="myInput" onkeyup="filterFunction()">
+          <input type="text" placeholder="Search.." name="search_drop" value="<?= $_POST['renter'] ? $_POST['renter'] : $_POST['search_drop'];?>" id="myInput" onkeyup="filterFunction()">
           <select name="renter">
             <option value="">Select...</option>
           <?php for($index = 0; $index < count($name_results); $index++) { ?>

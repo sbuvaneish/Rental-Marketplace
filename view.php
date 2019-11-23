@@ -54,19 +54,19 @@ $results = $records->fetchAll(PDO::FETCH_ASSOC);
     </form>
     <br>
     <div class="row">
-        <?php for($index = 0; $index < count($results); $index++) { ?>
+        <?php foreach($results as $row) { ?>
 
         <div class="col-md-3 col-sm-6">
             <div class="product-grid">
                 <div class="product-image">
-                    <img height="100" width="100" src="data:image/jpg;base64,<?=$results[$index]["image"]?>" />
+                    <img height="100" width="100" src="data:image/jpg;base64,<?=$row["image"]?>" />
                 </div>
                 
                 <div class="product-content">
-                    Description: <?= $results[$index]["description"] ?><br>
-                    Availability: <?= ($results[$index]["is_available"]) ? "Yes" : "No" ?><br>
-                    Date of Upload: <?= explode(" ", $results[$index]["datetime"])[0] ?>
-                    <a href="upload.php?product_id=<?=$results[$index]['product_id']?>" target="_blank" class="list-group-item list-group-item-action active" style="background-color:orange">More info!</a>
+                    Description: <?= $row["description"] ?><br>
+                    Availability: <?= ($row["is_available"]) ? "Yes" : "No" ?><br>
+                    Date of Upload: <?= explode(" ", $row["datetime"])[0] ?>
+                    <a href="upload.php?product_id=<?=$row['product_id']?>" target="_blank" class="list-group-item list-group-item-action active" style="background-color:orange">More info!</a>
                     <br>
                 </div>
                 

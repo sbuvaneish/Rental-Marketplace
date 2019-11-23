@@ -60,7 +60,7 @@ endif;
 	<form class="form-horizontal" action='' method="POST">
 	  <fieldset>
 	    <div id="legend">
-	      <legend class="" style="color:green">Register and begin renting!!</legend>
+	      <legend class="" style="color:green">Registration</legend>
 	    </div>
 	    
 	    <div>
