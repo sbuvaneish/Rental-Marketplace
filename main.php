@@ -77,21 +77,21 @@ if(isset($_SESSION['updation_flag'])){
     </div>
     
 
-    <h1>
-      Guide to Rental Marketplace.
-      <h3>
-        Upload Product: 
-      </h3>
-      <h3>
-        View my Product: 
-      </h3>
-      <h3>
-        Search Product: 
-      </h3>
-      <h3>
-        Message User: 
-      </h3>
-    </h1>
+    <!--<h1>-->
+    <!--  Guide to Rental Marketplace.-->
+    <!--  <h3>-->
+    <!--    Upload Product: -->
+    <!--  </h3>-->
+    <!--  <h3>-->
+    <!--    View my Product: -->
+    <!--  </h3>-->
+    <!--  <h3>-->
+    <!--    Search Product: -->
+    <!--  </h3>-->
+    <!--  <h3>-->
+    <!--    Message User: -->
+    <!--  </h3>-->
+    <!--</h1>-->
   </div>
 </div>
 
